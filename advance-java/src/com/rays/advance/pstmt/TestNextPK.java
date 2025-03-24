@@ -11,14 +11,14 @@ public class TestNextPK {
 
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-		PreparedStatement pstmt = conn.prepareStatement("select max(id) from marksheet");
+		PreparedStatement pstmt = conn.prepareStatement("select *  from marksheet");
 
 		ResultSet rs = pstmt.executeQuery();
 
 		while (rs.next()) {
 			pk = rs.getInt(1);
 		}
-		System.out.println(pk + 1);
-		// we'hd written this to get next primary key after 23
+		System.out.println(pk + 1); // we write +1 to get next primary key
+
 	}
 }
