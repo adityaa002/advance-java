@@ -8,18 +8,16 @@ import java.sql.Statement;
 public class TestInsert {
 
 	public static void main(String[] args) throws Exception {
-		
-		Class.forName("com.mysql.cj.jdbc.Driver");
-	
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-		
-		Statement stmt = conn.createStatement();
 
-		int i = stmt.executeUpdate("insert into marksheet values(21,121,'Adiiii',45,36,12)");
-		
-		System.out.println("data inserted-"+i);
-		
-		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		Statement stmt = conn.createStatement();
+		int i = stmt.executeUpdate("insert into marksheet values(32,123,'iman',68,54,32)");
+
+		System.out.println("data inserted-" + i);
+
 		/*
 		 * int j =
 		 * stmt.executeUpdate("insert into marksheet values(2,102,'Ashwin',65,99,65)");
