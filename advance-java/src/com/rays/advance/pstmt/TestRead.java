@@ -12,14 +12,17 @@ public class TestRead {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-	 PreparedStatement pstmt =   conn.prepareStatement("select  * from emp");
-	 
-	 ResultSet rs = pstmt.executeQuery();
+		PreparedStatement pstmt = conn.prepareStatement(
+				"select  id, name , salary from emp where salary = " + "(select max(salary) from emp where salary < "
+						+ "(select max(salary) from emp where salary < " + "(select max(salary) from emp)))");
 
-	 while(rs.next()) {
-		 System.out.print(rs.getInt(1));
-		 System.out.print("\t"+ rs.getString(2));
-		 System.out.println("\t"+ rs.getInt(3));
-	 }
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.print(rs.getInt(1));
+			System.out.print("\t"+rs.getString(2));
+			System.out.println("\t"+rs.getInt(3));
+		}
+
 	}
 }

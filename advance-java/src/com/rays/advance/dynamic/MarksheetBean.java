@@ -1,13 +1,20 @@
 package com.rays.advance.dynamic;
 
 public class MarksheetBean {
-
 	private int id;
 	private int rollno;
 	private String name;
 	private int physics;
 	private int chemistry;
 	private int maths;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public int getRollno() {
 		return rollno;
@@ -47,14 +54,6 @@ public class MarksheetBean {
 
 	public void setMaths(int maths) {
 		this.maths = maths;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 }
