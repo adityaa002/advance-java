@@ -13,10 +13,11 @@ public class TestInsert {
 
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		Statement stmt = conn.createStatement();
-		int i = stmt.executeUpdate("insert into marksheet values(32,123,'iman',68,54,32)");
-
-		System.out.println("data inserted-" + i);
+		 Statement stmt = conn.createStatement();
+		 
+		 int i = stmt.executeUpdate("insert into emp values(24,'praasta',68000)");
+		 
+		 System.out.println("Data inserted : -  " + i);
 
 		/*
 		 * int j =
