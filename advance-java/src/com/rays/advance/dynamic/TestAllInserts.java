@@ -13,7 +13,7 @@ public class TestAllInserts {
 		/// testInsert3(28, "kartik ", 78000);
 		EmployeeBean bean = new EmployeeBean();
 		bean.setId(29);
-		bean.setName("sourav");
+		bean.setName("Aditya");
 		bean.setSalary(45000);
 		
 		 testInsert4(bean);
