@@ -10,7 +10,7 @@ public class DynamicRead {
 
 	public static void main(String[] args) throws Exception {
 
-		// testRead1();
+		 testRead1();
 		// testRead2();
 		// testRead3(16, null, 0);
 
@@ -19,7 +19,7 @@ public class DynamicRead {
 		bean.setName("Aditya");
 		bean.setSalary(0);
 
-		testRead4(bean);
+	//	testRead4(bean);
 	}
 
 	public static void testRead1() throws Exception {
