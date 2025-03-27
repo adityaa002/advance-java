@@ -15,11 +15,12 @@ public class DynamicRead {
 		// testRead3(16, null, 0);
 
 		EmployeeBean bean = new EmployeeBean();
-		bean.setId(0);
-		bean.setName("Aditya");
-		bean.setSalary(0);
+		bean.setId(29);
+		bean.setName(null);
+		bean.setSalary(29);
 
-		testRead4(bean);
+		// testRead4(bean);
+		testRead5(bean);
 	}
 
 	public static void testRead1() throws Exception {
@@ -116,6 +117,39 @@ public class DynamicRead {
 		while (rs.next()) {
 			System.out.print(rs.getString(1));
 			System.out.print("\t" + rs.getInt(2));
+			System.out.println("\t" + rs.getInt(3));
+		}
+
+	}
+
+	public static void testRead5(EmployeeBean bean) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		StringBuffer sql = new StringBuffer("select * from emp where 1=1");
+
+		if (bean != null) {
+
+			if (bean.getId() > 0) {
+				sql.append(" and id = " + bean.getId());
+			}
+
+			if (bean.getName() != null && bean.getName().length() > 0) {
+				sql.append(" and name =  '" + bean.getName() + "'");
+			}
+			if (bean.getSalary() > 0) {
+				sql.append(" and salary = " + bean.getSalary());
+			}
+		}
+
+		System.out.println("Your Query : " + sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = pstmt.executeQuery();
+
+		while (rs.next()) {
+			System.out.print(rs.getInt(1));
+			System.out.print("\t" + rs.getString(2));
 			System.out.println("\t" + rs.getInt(3));
 		}
 

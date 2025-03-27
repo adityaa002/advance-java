@@ -1,32 +1,33 @@
 package com.rays.advance.dynamic;
 
-import java.beans.beancontext.BeanContext;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class TestAllInserts {
 	public static void main(String[] args) throws Exception {
 
-		MarksheetBean bean = new MarksheetBean();
-
-		bean.setId(30);
-		bean.setRollno(130);
-		bean.setName("wanda");
-		bean.setPhysics(45);
-		bean.setChemistry(54);
-		bean.setMaths(76);
-
-		testInsert4(bean);
+		// testInsert1();
+		// testInsert2();
+		/// testInsert3(28, "kartik ", 78000);
+		EmployeeBean bean = new EmployeeBean();
+		bean.setId(29);
+		bean.setName("Aditya");
+		bean.setSalary(45000);
+		
+		 testInsert4(bean);
 	}
 
 	public static void testInsert1() throws Exception {
+
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java","root", "root");
-		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values(24,124,'desmine', 34,67,54)");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+		PreparedStatement pstmt = conn.prepareStatement("insert into emp values(25 ,'apurv', 55000) ");
+
 		int i = pstmt.executeUpdate();
 
-		System.out.println("data inserted--> " + i);
+		System.out.println("Data inserted : " + i);
 
 	}
 
@@ -34,53 +35,48 @@ public class TestAllInserts {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values( ? , ? , ? , ? , ? , ? )");
-		pstmt.setInt(1, 26);
-		pstmt.setInt(2, 126);
-		pstmt.setString(3, "mark");
-		pstmt.setInt(4, 45);
-		pstmt.setInt(5,57 );
-		pstmt.setInt(6, 87);
+		String sql = "insert into emp values( ? , ? , ? )";
 
+		System.out.println("Your query : " + sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql);
+		pstmt.setInt(1, 27);
+		pstmt.setString(2, "kunal");
+		pstmt.setInt(3, 90500);
 		int i = pstmt.executeUpdate();
-		System.out.println("Data inserted using 2nd method--> " + i);
+
+		System.out.println("data inserted : " + i);
 
 	}
 
-	public static void testInsert3(int id, int rollno, String name, int physics, int chemistry, int maths)
-			throws Exception {
+	public static void testInsert3(int id, String name, int salary) throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
-		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values(? , ? , ? , ? , ? , ?)   ");
+
+		PreparedStatement pstmt = conn.prepareStatement("insert into emp values(? , ? , ?)");
 		pstmt.setInt(1, id);
-		pstmt.setInt(2, rollno);
-		pstmt.setString(3, name);
-		pstmt.setInt(4, physics);
-		pstmt.setInt(5, chemistry);
-		pstmt.setInt(6, maths);
+		pstmt.setString(2, name);
+		pstmt.setInt(3, salary);
 
 		int i = pstmt.executeUpdate();
 
-		System.out.println("Data inserted using 3rd method");
+		System.out.println("Data Inserted : " + i);
 
 	}
 
-	public static void testInsert4(MarksheetBean bean) throws Exception {
-
+	public static void testInsert4(EmployeeBean bean) throws Exception {
 		Class.forName("com.mysql.cj.jdbc.Driver");
-		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java","root","root");
+		;
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
 
-		PreparedStatement pstmt = conn.prepareStatement("insert into marksheet values (	? , ? , ? , ? , ? , ? )");
+		PreparedStatement pstmt = conn.prepareStatement("insert into emp values(? , ? , ?)");
 
 		pstmt.setInt(1, bean.getId());
-		pstmt.setInt(2, bean.getRollno());
-		pstmt.setString(3, bean.getName());
-		pstmt.setInt(4, bean.getPhysics());
-		pstmt.setInt(5, bean.getChemistry());
-		pstmt.setInt(6, bean.getMaths());
+		pstmt.setString(2, bean.getName());
+		pstmt.setInt(3, bean.getId());
 
 		int i = pstmt.executeUpdate();
-		System.out.println("Data inserted using 4th method " + i);
 
+		System.out.println("Data inserted : " + i);
 	}
+
 }
