@@ -6,6 +6,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class UserModel {
 
@@ -119,6 +121,69 @@ public class UserModel {
 			System.out.print("\t" + rs.getDate(6));
 			System.out.println("\t" + rs.getString(7));
 		}
+
+	}
+
+	public static List search(UserBean bean, int pageNo, int pageSize) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+		StringBuffer sql = new StringBuffer("select * from user where 1=1 ");
+		if (bean != null) {
+			if (bean.getId() > 0) {
+				sql.append(" and id=" + bean.getId());
+			}
+			if (bean.getFirstName() != null && bean.getFirstName().length() > 0) {
+				sql.append(" and name like =  '" + bean.getFirstName() + "%'");
+			}
+		}
+		if (pageSize > 0) {
+			pageNo = (pageSize - 1) * pageNo;
+			sql.append(" limit " + pageNo + "," + pageSize);
+
+		}
+
+		System.out.println("Your Query : " + sql);
+		PreparedStatement pstmt = conn.prepareStatement(sql.toString());
+
+		ResultSet rs = pstmt.executeQuery();
+		List list = new ArrayList();
+		while (rs.next()) {
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLoginId(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setAddress(rs.getString(7));
+			list.add(bean);
+		}
+		return list;
+
+	}
+
+	public static UserBean authenticate(String loginId, String password) throws Exception {
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/advance_java", "root", "root");
+
+		PreparedStatement pstmt = conn.prepareStatement("select * from user where login_id = ? and password = ?  ");
+
+		pstmt.setString(1, loginId);
+		pstmt.setString(2, password);
+		ResultSet rs = pstmt.executeQuery();
+
+		UserBean bean = null;
+		while (rs.next()) {
+			bean = new UserBean();
+			bean.setId(rs.getInt(1));
+			bean.setFirstName(rs.getString(2));
+			bean.setLastName(rs.getString(3));
+			bean.setLoginId(rs.getString(4));
+			bean.setPassword(rs.getString(5));
+			bean.setDob(rs.getDate(6));
+			bean.setAddress(rs.getString(7));
+		}
+		return bean;
 
 	}
 
