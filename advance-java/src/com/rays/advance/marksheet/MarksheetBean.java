@@ -2,21 +2,14 @@ package com.rays.advance.marksheet;
 
 public class MarksheetBean {
 	private int id;
+	private int rollNo;
 
-	public int getId() {
-		return id;
+	public int getRollNo() {
+		return rollNo;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getRollno() {
-		return rollno;
-	}
-
-	public void setRollno(int rollno) {
-		this.rollno = rollno;
+	public void setRollNo(int rollNo) {
+		this.rollNo = rollNo;
 	}
 
 	public String getName() {
@@ -51,9 +44,16 @@ public class MarksheetBean {
 		this.maths = maths;
 	}
 
-	private int rollno;
 	private String name;
 	private int physics;
 	private int chemistry;
 	private int maths;
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public int getId() {
+		return id;
+	}
 }

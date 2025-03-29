@@ -15,8 +15,8 @@ public class TestAllInserts {
 		bean.setId(29);
 		bean.setName("Aditya");
 		bean.setSalary(45000);
-		
-		 testInsert4(bean);
+
+		testInsert4(bean);
 	}
 
 	public static void testInsert1() throws Exception {
@@ -72,7 +72,7 @@ public class TestAllInserts {
 
 		pstmt.setInt(1, bean.getId());
 		pstmt.setString(2, bean.getName());
-		pstmt.setInt(3, bean.getId());
+		pstmt.setInt(3, bean.getSalary());
 
 		int i = pstmt.executeUpdate();
 
