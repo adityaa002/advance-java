@@ -32,7 +32,7 @@ public class UserBean {
 		return login;
 	}
 
-	public void setLogin(String login) {
+	public void setLoginId(String login) {
 		this.login = login;
 	}
 
