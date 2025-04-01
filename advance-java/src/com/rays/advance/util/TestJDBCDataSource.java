@@ -6,21 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class TestJDBCDataSource {
-
-	public static void main(String[] args) throws Exception {
-
-		for (int i = 0; i <= 50; i++) {
-			System.out.println("Connection count :  " + i);
-			testGet();
-
+	public static void main(String[] args) throws SQLException {
+		for (int i = 0; i < 50; i++) {
+			System.out.println("Connection :-" + i);
+			getConn();
 		}
 	}
 
-	public static void testGet() throws Exception {
-
+	public static void getConn() throws SQLException {
 		Connection conn = JDBCDataSource.getConnection();
-
-		PreparedStatement pstmt = conn.prepareStatement("Select * from marksheet where id = 1");
+		PreparedStatement pstmt = conn.prepareStatement("select  * from marksheet where id = 4");
 
 		ResultSet rs = pstmt.executeQuery();
 
@@ -32,6 +27,6 @@ public class TestJDBCDataSource {
 			System.out.print("\t" + rs.getInt(5));
 			System.out.println("\t" + rs.getInt(6));
 		}
-
+		conn.close(); 
 	}
 }
